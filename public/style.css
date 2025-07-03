@@ -1,0 +1,60 @@
+body {
+    min-height: 100vh;
+    background-color: #17153B;
+    padding: 0;
+    margin: 0;
+}
+
+.offcanvas{
+    background-color: #17153B;
+    color: #C8ACD6;
+}
+
+.navbar{
+    background-color: #17153B;
+    color: #C8ACD6;
+    border-color: #433D8B !important;
+}
+
+.navbar a, .navbar a:visited, .navbar a:active, .navbar a:focus{
+    color: #433D8B;
+}
+.navbar a:hover{
+    color: #2E236C;
+}
+
+.btn:hover{
+    background-color: #17153B;
+}
+
+.promptSection{
+    color: #C8ACD6;
+}
+
+.sectionTitle{
+    color: #17153B;
+}
+
+#simplePrompt{
+    background-color: #2E236C;
+}
+
+#iterationPrompt{
+    background-color: #433D8B;
+}
+
+#agentPrompt{
+    background-color: #2E236C;
+}
+
+.nav-link:hover{
+    text-decoration: underline;
+}
+
+.footer {
+   position: relative;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   color: #433D8B;
+}

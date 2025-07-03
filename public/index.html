@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QPE - QuickPromptEngineer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        xintegrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="d-flex flex-column min-vh-100">
+        <header class="header sticky-top">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg border-bottom border-2 navbar-dark">
+                <div class="container-fluid">
+                    <!-- Toggle icon à gauche -->
+                    <button class="navbar-toggler me-2 border-0" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+                        aria-label="Toggle navigation" style="box-shadow: none">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Titre pour md+ -->
+                    <a class="navbar-brand d-none d-md-block" href="#">
+                        <div class="d-flex align-items-center">
+                            <h1 class="display-3 d-none d-lg-block">QuickPromptEngineer</h1>
+                            <h1 class="display-3 d-block d-lg-none">QuickPromptEngineer</h1>
+                        </div>
+                    </a>
+                    <!-- Titre pour sm -->
+                    <a class="navbar-brand d-none d-sm-block d-md-none" href="#">
+                        <h1 class="display-4">QuickPromptEngineer</h1>
+                    </a>
+                    <!-- Titre pour xs- -->
+                    <a class="navbar-brand text-end d-block d-sm-none" href="#">
+                        <h1 class="display-2 mb-0 pb-0">QPE</h1>
+                        <p class="mt-0 pt-0" style="font-size: 8px">QuickPromptEngineer</p>
+                    </a>
+
+                    <!-- Menu collapse -->
+                    <div class="offcanvas offcanvas-start" id="navbarText">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title">QuickPromptEngineer</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                                style="box-shadow: none"></button>
+                        </div>
+                        <div class="offcanvas-body p-0">
+                            <ul class="navbar-nav d-block d-lg-none ms-0 me-auto mb-2 mb-lg-0">
+                                <li class="nav-item ps-3">
+                                    <a class="nav-link" href="#simplePrompt">Basic Prompt</a>
+                                </li>
+                                <li class="nav-item ps-3">
+                                    <a class="nav-link" href="#iterationPrompt">Tree of Thoughts Prompting</a>
+                                </li>
+                                <li class="nav-item ps-3">
+                                    <a class="nav-link" href="#agentPrompt">Initialize Agent</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Fin Navbar -->
+        </header>
+
+
+        <main class="flex-fill">
+            <div class="container-fluid">
+                <div class="row m-3">
+
+                    <!-- STARTING SECTION -->
+                    <div class="col-12 col-xl-4 promptSection rounded-3 p-4" id="simplePrompt">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col sectionTitle">
+                                    <h3 class="mb-0 pb-0">Basic Prompt</h3>
+                                    <p class="lead mt-0 pt-0"><small>For the initial demand</small></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <form class="promptForm" id="startingPromptForm" data-bs-theme="dark">
+                                    <!-- Section Personas -->
+                                    <div class="field-group mb-3" id="starting_roleGroup">
+                                        <div class="field-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="field-title">Personas</span>
+                                                    <div class="field-controls ms-3">
+                                                        <button type="button" class="btn btn-sm addBtn active"
+                                                            onclick="addField('starting', 'role')">
+                                                            +
+                                                        </button>
+                                                        <button type="button" class="btn btn-sm toggle active"
+                                                            onclick="toggleGroup('starting_roleGroup')">
+                                                            ✓ Active
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="starting_roleAddon">Act as
+                                                            a</span>
+                                                        <input type="text" class="form-control" id="starting_role_1"
+                                                            placeholder="Define a persona..."
+                                                            aria-describedby="starting_roleAddon" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Actions -->
+                                    <div class="actions-section">
+                                        <div class="actions-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="actions-title">Task blocks</span>
+                                                    <div class="ms-3">
+                                                        <button type="button" class="btn btn-sm btn-add-action active"
+                                                            onclick="addActionBlock('starting')">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="container rounded border border-secondary p-2 m-3"
+                                            id="starting_actionsContainer">
+                                            <div class="action-block" id="starting_actionBlock_1">
+                                                <div class="action-block-header mb-2">
+                                                    <span class="action-block-title">Task 1</span>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="starting_actionAddon_1">to</span>
+                                                            <input type="text" class="form-control"
+                                                                id="starting_action_1_1"
+                                                                placeholder="write, create, analyze, explain..."
+                                                                aria-describedby="starting_actionAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="starting_subjectAddon_1">a</span>
+                                                            <input type="text" class="form-control"
+                                                                id="starting_subject_1_1"
+                                                                placeholder="blog post, strategy, piece of code..."
+                                                                aria-describedby="starting_subjectAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="starting_receiverAddon_1">for</span>
+                                                            <input type="text" class="form-control"
+                                                                id="starting_receiver_1_1"
+                                                                placeholder="a client, a friend, a web application..."
+                                                                aria-describedby="starting_receiverAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="starting_contextAddon_1">that</span>
+                                                            <input type="text" class="form-control"
+                                                                id="starting_context_1_1"
+                                                                placeholder="has a young family, sell used books..."
+                                                                aria-describedby="starting_contextAddon_1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Section contraintes -->
+                                        <div class="container rounded border border-secondary p-2 m-3"
+                                            id="starting_constraintsContainer">
+                                            <div class="sub-field-group mb-2">
+                                                <div class="sub-field-header">
+                                                    <div class="row">
+                                                        <div class="col m-2 d-flex align-items-center">
+                                                            <span
+                                                                class="sub-field-title"><small>Constraints</small></span>
+                                                            <div class="field-controls ms-3">
+                                                                <button type="button" class="btn btn-sm addBtn active"
+                                                                    onclick="addField('starting', 'constraint')">
+                                                                    +
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group field">
+                                                    <span class="input-group-text" id="starting_constraintAddon_1">I
+                                                        want</span>
+                                                    <input type="text" class="form-control" id="starting_constraint_1"
+                                                        placeholder="a step-by-step process, the data into a table..." />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Exemple -->
+                                    <div class="exemple-section">
+                                        <div class="exemple-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="actions-title">Examples/References</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text"
+                                                            id="starting_exampleAddon_1">1</span>
+                                                        <textarea class="form-control" id="starting_example_1" rows="3"
+                                                            placeholder="Copy and paste the example/reference here or add file to your final prompt"
+                                                            aria-label="1"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text"
+                                                            id="starting_exampleAddon_2">2</span>
+                                                        <textarea class="form-control" id="starting_example_2" rows="3"
+                                                            placeholder="It is recommended to provide at least one example/reference, but not more than two"
+                                                            aria-label="2"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Generate -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col m-2 d-flex justify-content-center align-items-center">
+                                                <button class="btn active" type="submit">Generate prompt</button>
+                                                <input class="btn btn-outline-secondary" type="reset" value="↻">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <button type="button" class="btn active input-group-text"
+                                            onclick="copyPrompt('starting_result', event)">Copy</button>
+                                        <textarea id="starting_result" class="form-control" readonly
+                                            style="overflow:hidden; resize:none;"
+                                            placeholder="Your generated prompt will appear here..."
+                                            aria-label="Copy"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TREE OF THOUGHTS SECTION -->
+                    <div class="col-12 col-xl-4 promptSection rounded-3 p-4" id="iterationPrompt">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col sectionTitle">
+                                    <h3 class="mb-0 pb-0">Tree of Thoughts Prompting</h3>
+                                    <p class="lead mt-0 pt-0"><small>For exploring multiple reasoning paths</small></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <form class="promptForm" id="treePromptForm" data-bs-theme="dark">
+                                    <!-- Section Personas -->
+                                    <div class="field-group mb-3" id="tree_roleGroup">
+                                        <div class="field-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="field-title">Expert Persona (singular)</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="tree_roleAddon">Expert</span>
+                                                        <input type="text" class="form-control" id="tree_role_1"
+                                                            placeholder="marketing specialist, data scientist..."
+                                                            aria-describedby="tree_roleAddon" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Actions -->
+                                    <div class="actions-section">
+                                        <div class="actions-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="actions-title">Task blocks</span>
+                                                    <div class="ms-3">
+                                                        <button type="button" class="btn btn-sm btn-add-action active"
+                                                            onclick="addActionBlock('tree')">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="container rounded border border-secondary p-2 m-3"
+                                            id="tree_actionsContainer">
+                                            <div class="action-block" id="tree_actionBlock_1">
+                                                <div class="action-block-header mb-2">
+                                                    <span class="action-block-title">Task 1</span>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="tree_actionAddon_1">to</span>
+                                                            <input type="text" class="form-control" id="tree_action_1_1"
+                                                                placeholder="compare, sketch, optimize, recommend..."
+                                                                aria-describedby="tree_actionAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="tree_subjectAddon_1">a</span>
+                                                            <input type="text" class="form-control"
+                                                                id="tree_subject_1_1"
+                                                                placeholder="business pitch, database schema..."
+                                                                aria-describedby="tree_subjectAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="tree_receiverAddon_1">for</span>
+                                                            <input type="text" class="form-control"
+                                                                id="tree_receiver_1_1"
+                                                                placeholder="a nonprofit, an employer, an e-commerce..."
+                                                                aria-describedby="tree_receiverAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="tree_contextAddon_1">that</span>
+                                                            <input type="text" class="form-control"
+                                                                id="tree_context_1_1"
+                                                                placeholder="travels frequently, manages social media..."
+                                                                aria-describedby="tree_contextAddon_1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Section contraintes -->
+                                        <div class="container rounded border border-secondary p-2 m-3"
+                                            id="tree_constraintsContainer">
+                                            <div class="sub-field-group mb-2">
+                                                <div class="sub-field-header">
+                                                    <div class="row">
+                                                        <div class="col m-2 d-flex align-items-center">
+                                                            <span
+                                                                class="sub-field-title"><small>Constraints</small></span>
+                                                            <div class="field-controls ms-3">
+                                                                <button type="button" class="btn btn-sm addBtn active"
+                                                                    onclick="addField('tree', 'constraint')">
+                                                                    +
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group field">
+                                                    <span class="input-group-text" id="tree_constraintAddon_1">I
+                                                        want</span>
+                                                    <input type="text" class="form-control" id="tree_constraint_1"
+                                                        placeholder="use real-world examples, output in JSON format..." />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Exemple -->
+                                    <div class="exemple-section">
+                                        <div class="exemple-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="actions-title">Examples/References</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="tree_exampleAddon_1">1</span>
+                                                        <textarea class="form-control" id="tree_example_1" rows="3"
+                                                            placeholder="Copy and paste the example/reference here or add file to your final prompt"
+                                                            aria-label="1"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="tree_exampleAddon_2">2</span>
+                                                        <textarea class="form-control" id="tree_example_2" rows="3"
+                                                            placeholder="It is recommended to provide at least one example/reference, but not more than two"
+                                                            aria-label="2"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Generate -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col m-2 d-flex justify-content-center align-items-center">
+                                                <button class="btn active" type="submit">Generate prompt</button>
+                                                <input class="btn btn-outline-secondary" type="reset" value="↻">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <button type="button" class="btn active input-group-text"
+                                            onclick="copyPrompt('tree_result', event)">Copy</button>
+                                        <textarea id="tree_result" class="form-control" readonly
+                                            style="overflow:hidden; resize:none;"
+                                            placeholder="Your generated prompt will appear here..."
+                                            aria-label="Copy"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AGENT SECTION -->
+                    <div class="col-12 col-xl-4 promptSection rounded-3 p-4" id="agentPrompt">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col sectionTitle">
+                                    <h3 class="mb-0 pb-0">Initialize Agent</h3>
+                                    <p class="lead mt-0 pt-0"><small>For simulation and role-playing</small></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-center p-4">
+                                    <div class="text-muted">
+                                        <i class="h1">🚧</i>
+                                        <p class="lead text-info-emphasis">Coming Soon</p>
+                                        <p class="text-info-emphasis">This section will be available in the next update.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row" style="padding-top: 2rem; padding-bottom: 2rem;">
+                        <div class="col-6 text-start">
+                            <p><small>QuickPromptEngineer</small></p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p><small>&copy Hugo Cournoyer | 2025</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        xintegrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

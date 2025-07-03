@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QPE - QuickPromptEngineer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="d-flex flex-column min-vh-100">
+        <header class="header sticky-top">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg border-bottom border-2 navbar-dark">
+                <div class="container-fluid">
+                    <!-- Toggle icon à gauche -->
+                    <button class="navbar-toggler me-2 border-0" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+                        aria-label="Toggle navigation" style="box-shadow: none">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Titre pour md+ -->
+                    <a class="navbar-brand d-none d-md-block" href="#">
+                        <div class="d-flex align-items-center">
+                            <h1 class="display-3 d-none d-lg-block">QuickPromptEngineer</h1>
+                            <h1 class="display-3 d-block d-lg-none">QuickPromptEngineer</h1>
+                        </div>
+                    </a>
+                    <!-- Titre pour sm -->
+                    <a class="navbar-brand d-none d-sm-block d-md-none" href="#">
+                        <h1 class="display-4">QuickPromptEngineer</h1>
+                    </a>
+                    <!-- Titre pour xs- -->
+                    <a class="navbar-brand text-end d-block d-sm-none" href="#">
+                        <h1 class="display-2 mb-0 pb-0">QPE</h1>
+                        <p class="mt-0 pt-0" style="font-size: 8px">QuickPromptEngineer</p>
+                    </a>
+
+                    <!-- Menu collapse -->
+                    <div class="offcanvas offcanvas-start" id="navbarText">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title">QuickPromptEngineer</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+                                style="box-shadow: none"></button>
+                        </div>
+                        <div class="offcanvas-body p-0">
+                            <ul class="navbar-nav d-block d-lg-none ms-0 me-auto mb-2 mb-lg-0">
+                                <li class="nav-item ps-3">
+                                    <a class="nav-link" href="#simplePrompt">Starting Prompt</a>
+                                </li>
+                                <li class="nav-item ps-3">
+                                    <a class="nav-link" href="#iterationPrompt">Iteration Prompt</a>
+                                </li>
+                                <li class="nav-item ps-3">
+                                    <a class="nav-link" href="#agentPrompt">Initialize Agent</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Fin Navbar -->
+        </header>
+
+
+        <main class="flex-fill">
+            <div class="container-fluid">
+                <div class="row m-3">
+
+                    <!-- STARTING SECTION -->
+                    <div class="col-12 col-lg-4 promptSection rounded-3 p-4" id="simplePrompt">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col sectionTitle">
+                                    <h3 class="mb-0 pb-0">Starting Prompt</h3>
+                                    <p class="lead mt-0 pt-0"><small>For the initial demand</small></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <form class="promptForm" id="simplePromptForm" data-bs-theme="dark">
+                                    <!-- Section Personas -->
+                                    <div class="field-group mb-3" id="roleGroup">
+                                        <div class="field-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="field-title">Personas</span>
+                                                    <div class="field-controls ms-3">
+                                                        <button type="button" class="btn btn-sm addBtn active"
+                                                            onclick="addField('role')">
+                                                            +
+                                                        </button>
+                                                        <button type="button" class="btn btn-sm toggle active"
+                                                            onclick="toggleGroup('roleGroup')">
+                                                            ✓ Active
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="roleAddon">Act as a</span>
+                                                        <input type="text" class="form-control" id="role_1"
+                                                            placeholder="Define a persona..."
+                                                            aria-describedby="roleAddon" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Actions -->
+                                    <div class="actions-section">
+                                        <div class="actions-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="actions-title">Task blocks</span>
+                                                    <div class="ms-3">
+                                                        <button type="button" class="btn btn-sm btn-add-action active"
+                                                            onclick="addActionBlock()">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="container rounded border border-secondary p-2 m-3"
+                                            id="actionsContainer">
+                                            <div class="action-block" id="actionBlock_1">
+                                                <div class="action-block-header mb-2">
+                                                    <span class="action-block-title">Task 1</span>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text" id="actionAddon_1">to</span>
+                                                            <input type="text" class="form-control" id="action_1_1"
+                                                                placeholder="write, create, analyze, explain..."
+                                                                aria-describedby="actionAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text" id="subjectAddon_1">a</span>
+                                                            <input type="text" class="form-control" id="subject_1_1"
+                                                                placeholder="blog post, strategy, piece of code..."
+                                                                aria-describedby="subjectAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="receiverAddon_1">for</span>
+                                                            <input type="text" class="form-control" id="receiver_1_1"
+                                                                placeholder="a client, a friend, a web application..."
+                                                                aria-describedby="receiverAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="contextAddon_1">that</span>
+                                                            <input type="text" class="form-control" id="context_1_1"
+                                                                placeholder="has a young family, sell used books..."
+                                                                aria-describedby="contextAddon_1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Section contraintes -->
+                                        <div class="container rounded border border-secondary p-2 m-3"
+                                            id="constraintsContainer">
+                                            <div class="sub-field-group mb-2">
+                                                <div class="sub-field-header">
+                                                    <div class="row">
+                                                        <div class="col m-2 d-flex align-items-center">
+                                                            <span
+                                                                class="sub-field-title"><small>Constraints</small></span>
+                                                            <div class="field-controls ms-3">
+                                                                <button type="button" class="btn btn-sm addBtn active"
+                                                                    onclick="addField('constraint')">
+                                                                    +
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group field">
+                                                    <span class="input-group-text" id="constraintAddon_1">I
+                                                        want</span>
+                                                    <input type="text" class="form-control" id="constraint_1"
+                                                        placeholder="a step-by-step process, the data into a table..." />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Exemple -->
+                                    <div class="exemple-section">
+                                        <div class="exemple-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="actions-title">Examples/References</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="exampleAddon_1">1</span>
+                                                        <textarea class="form-control" id="example_1"
+                                                            placeholder="Copy and paste the example/reference here or add file to your final prompt"
+                                                            aria-label="1"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="exampleAddon_2">2</span>
+                                                        <textarea class="form-control" id="example_2"
+                                                            placeholder="It is recommended to provide at least one example/reference, but not more than two"
+                                                            aria-label="2"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Generate -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col m-2 d-flex justify-content-center align-items-center">
+                                                <button class="btn active" type="submit">Generate prompt</button>
+                                                <input class="btn btn-outline-secondary" type="reset" value="↻">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <button class="btn active input-group-text"
+                                            onclick="copyPrompt(event)">Copy</button>
+                                            <span id="copyFeedback" style="margin-left:10px; color:green; display:none;">✔️ Copié !</span>
+                                        <textarea id="result" class="form-control" readonly style="overflow:hidden; resize:none;"
+                                            placeholder="Your generated prompt will appear here..." aria-label="Copy"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- ITERATION SECTION -->
+                    <div class="col-12 col-lg-4 promptSection rounded-3 p-4" id="iterationPrompt">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col sectionTitle">
+                                    <h3 class="mb-0 pb-0">Tree of Thoughts Prompting</h3>
+                                    <p class="lead mt-0 pt-0"><small>For exploring multiple reasoning paths</small></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <form class="promptForm" id="simplePromptForm" data-bs-theme="dark">
+                                    <!-- Section Personas -->
+                                    <div class="field-group mb-3" id="roleGroup">
+                                        <div class="field-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="field-title">Personas</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="roleAddon">Experts</span>
+                                                        <input type="text" class="form-control" id="role_1"
+                                                            placeholder="Define a persona..."
+                                                            aria-describedby="roleAddon" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Actions -->
+                                    <div class="actions-section">
+                                        <div class="actions-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="actions-title">Tasks for the expert to perform</span>
+                                                    <div class="ms-3">
+                                                        <button type="button" class="btn btn-sm btn-add-action active"
+                                                            onclick="addActionBlock()">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="container rounded border border-secondary p-2 m-3"
+                                            id="actionsContainer">
+                                            <div class="action-block" id="actionBlock_1">
+                                                <div class="action-block-header mb-2">
+                                                    <span class="action-block-title">Task 1</span>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text" id="actionAddon_1">to</span>
+                                                            <input type="text" class="form-control" id="action_1_1"
+                                                                placeholder="write, create, analyze, explain..."
+                                                                aria-describedby="actionAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text" id="subjectAddon_1">a</span>
+                                                            <input type="text" class="form-control" id="subject_1_1"
+                                                                placeholder="blog post, strategy, piece of code..."
+                                                                aria-describedby="subjectAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="receiverAddon_1">for</span>
+                                                            <input type="text" class="form-control" id="receiver_1_1"
+                                                                placeholder="a client, a friend, a web application..."
+                                                                aria-describedby="receiverAddon_1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="sub-field-group mb-2">
+                                                        <div class="input-group field">
+                                                            <span class="input-group-text"
+                                                                id="contextAddon_1">that</span>
+                                                            <input type="text" class="form-control" id="context_1_1"
+                                                                placeholder="has a young family, sell used books..."
+                                                                aria-describedby="contextAddon_1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Section contraintes -->
+                                        <div class="container rounded border border-secondary p-2 m-3"
+                                            id="constraintsContainer">
+                                            <div class="sub-field-group mb-2">
+                                                <div class="sub-field-header">
+                                                    <div class="row">
+                                                        <div class="col m-2 d-flex align-items-center">
+                                                            <span
+                                                                class="sub-field-title"><small>Constraints</small></span>
+                                                            <div class="field-controls ms-3">
+                                                                <button type="button" class="btn btn-sm addBtn active"
+                                                                    onclick="addField('constraint')">
+                                                                    +
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group field">
+                                                    <span class="input-group-text" id="constraintAddon_1">I
+                                                        want</span>
+                                                    <input type="text" class="form-control" id="constraint_1"
+                                                        placeholder="a step-by-step process, the data into a table..." />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Exemple -->
+                                    <div class="exemple-section">
+                                        <div class="exemple-header m-2">
+                                            <div class="row">
+                                                <div class="col m-2 d-flex align-items-center">
+                                                    <span class="actions-title">Examples/References</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="exampleAddon_1">1</span>
+                                                        <textarea class="form-control" id="example_1"
+                                                            placeholder="Copy and paste the example/reference here or add file to your final prompt"
+                                                            aria-label="1"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group field m-2">
+                                                        <span class="input-group-text" id="exampleAddon_2">2</span>
+                                                        <textarea class="form-control" id="example_2"
+                                                            placeholder="It is recommended to provide at least one example/reference, but not more than two"
+                                                            aria-label="2"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Generate -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col m-2 d-flex justify-content-center align-items-center">
+                                                <button class="btn active" type="submit">Generate prompt</button>
+                                                <input class="btn btn-outline-secondary" type="reset" value="↻">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <button class="btn active input-group-text"
+                                            onclick="copyPrompt(event)">Copy</button>
+                                            <span id="copyFeedback" style="margin-left:10px; color:green; display:none;">✔️ Copié !</span>
+                                        <textarea id="result" class="form-control" readonly style="overflow:hidden; resize:none;"
+                                            placeholder="Your generated prompt will appear here..." aria-label="Copy"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AGENT SECTION -->
+                    <div class="col-12 col-lg-4 promptSection rounded-3 p-4" id="agentPrompt">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col sectionTitle">
+                                    <h3 class="mb-0 pb-0">Initialize Agent</h3>
+                                    <p class="lead mt-0 pt-0"><small>For simulation and role-playing</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row" style="padding-top: 2rem; padding-bottom: 2rem;">
+                        <div class="col-6 text-start">
+                            <p><small>QuickPromptEngineer</small></p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p><small>&copy Hugo Cournoyer | 2025</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
